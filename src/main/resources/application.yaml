@@ -13,6 +13,6 @@ spring:
       ddl-auto: update
     show-sql: true
 
-security:
+app:
   jwt:
-    secret: ${JWT_SECRET:D6quHUHB2TJwQNxzy+K+fWaj+jPBoYI6rSHuv7vSCj9+nq/oI7V1+avXfWL5yJgk} #Needs to be changed
+    secret: ${JWT_SECRET:D6quHUHB2TJwQNxzy+K+fWaj+jPBoYI6rSHuv7vSCj9+nq/oI7V1+avXfWL5yJgk} #Needs to be changedsecurity:

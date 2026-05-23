@@ -14,15 +14,15 @@ import java.nio.charset.StandardCharsets;
 @Component
 public class JwtService {
 
-    @Value("${security.jwt.secret}")
+    @Value("${app.jwt.secret}")
     private String secret;
 
     private SecretKey key;
 
     @PostConstruct
     void init() {
-        // The same secret must be configured in the auth-service.
-        // Must be at least 32 bytes for HS256.
+        // Must match auth-service's app.jwt.secret exactly.
+        // At least 64 bytes for HS512 (Keys.hmacShaKeyFor picks the alg by key length).
         this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
@@ -38,16 +38,26 @@ public class JwtService {
         return jws.getPayload();
     }
 
+    /** Numeric user id from the "userId" claim (set by auth-service). */
     public Long extractUserId(Claims claims) {
-        Object sub = claims.getSubject();
-        if (sub == null) {
-            throw new IllegalArgumentException("Token missing subject (userId)");
+        Object userId = claims.get("userId");
+        if (userId == null) {
+            throw new IllegalArgumentException("Token missing userId claim");
         }
-        return Long.parseLong(sub.toString());
+        // Jackson may deserialize as Integer or Long depending on size.
+        if (userId instanceof Number n) {
+            return n.longValue();
+        }
+        return Long.parseLong(userId.toString());
     }
 
+    /** Username is in the "sub" (subject) claim. */
     public String extractUsername(Claims claims) {
-        Object name = claims.get("username");
-        return name != null ? name.toString() : null;
+        return claims.getSubject();
+    }
+
+    /** Role string from the "role" claim ("USER" or "ADMIN"). May be null. */
+    public String extractRole(Claims claims) {
+        return claims.get("role", String.class);
     }
 }
