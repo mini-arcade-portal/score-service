@@ -15,4 +15,4 @@ spring:
 
 app:
   jwt:
-    secret: ${JWT_SECRET:D6quHUHB2TJwQNxzy+K+fWaj+jPBoYI6rSHuv7vSCj9+nq/oI7V1+avXfWL5yJgk} #Needs to be changedsecurity:
+    secret: ${JWT_SECRET:kJ8mP3vN7qR2wX5yB9zT4cF6hL1nQ0aE8sU+iY/jW=Hd2xV3rK5pZ7tM9bN4cQ6w}
