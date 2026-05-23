@@ -13,8 +13,6 @@ spring:
       ddl-auto: update
     show-sql: true
 
-springdoc:
-  api-docs:
-    enabled: true
-  swagger-ui:
-    enabled: true
+security:
+  jwt:
+    secret: ${JWT_SECRET:D6quHUHB2TJwQNxzy+K+fWaj+jPBoYI6rSHuv7vSCj9+nq/oI7V1+avXfWL5yJgk} #Needs to be changed
