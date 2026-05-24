@@ -1,6 +1,5 @@
 server:
   port: 8082
-
 spring:
   application:
     name: score-service
@@ -12,7 +11,13 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
 app:
   jwt:
     secret: ${JWT_SECRET:kJ8mP3vN7qR2wX5yB9zT4cF6hL1nQ0aE8sU+iY/jW=Hd2xV3rK5pZ7tM9bN4cQ6w}
