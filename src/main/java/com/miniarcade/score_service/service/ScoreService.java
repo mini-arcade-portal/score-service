@@ -28,6 +28,7 @@ public class ScoreService {
                 .userId(user.userId())
                 .username(user.username())
                 .gameType(req.gameType())
+                .difficulty(req.difficulty())
                 .score(req.score())
                 .build();
         return ScoreResponse.from(scoreRepository.save(score));

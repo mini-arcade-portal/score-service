@@ -1,5 +1,6 @@
 package com.miniarcade.score_service.dto;
 
+import com.miniarcade.score_service.entity.Difficulty;
 import com.miniarcade.score_service.entity.Score;
 
 import java.time.Instant;
@@ -9,6 +10,7 @@ public record ScoreResponse(
         Long userId,
         String username,
         String gameType,
+        Difficulty difficulty,
         Long score,
         Instant createdAt
 ) {
@@ -18,6 +20,7 @@ public record ScoreResponse(
                 s.getUserId(),
                 s.getUsername(),
                 s.getGameType(),
+                s.getDifficulty(),
                 s.getScore(),
                 s.getCreatedAt()
         );
