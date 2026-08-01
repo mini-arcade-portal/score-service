@@ -40,6 +40,10 @@ public class Score {
     @Column(nullable = false)
     private Long score;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 16)
+    private Difficulty difficulty;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
