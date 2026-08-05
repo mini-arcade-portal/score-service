@@ -12,6 +12,14 @@ spring:
       ddl-auto: update
     show-sql: true
     open-in-view: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus,info
+  metrics:
+    tags:
+      application: ${spring.application.name}
 springdoc:
   api-docs:
     enabled: true
