@@ -36,7 +36,7 @@ jobs:
 
       - name: Test
         env:
-          JWT_SECRET: ci-test-secret-not-for-prod
+          JWT_SECRET: ci-test-secret-not-for-prod-0123456789abcdef
         run: ./mvnw -B -ntp test
 
       - uses: docker/setup-buildx-action@v3
