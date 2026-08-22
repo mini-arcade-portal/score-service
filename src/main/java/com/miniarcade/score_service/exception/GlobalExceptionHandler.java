@@ -18,6 +18,21 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody(404, ex.getMessage()));
     }
 
+    @ExceptionHandler(SessionAlreadyUsedException.class)
+    public ResponseEntity<Map<String, Object>> handleSessionAlreadyUsed(SessionAlreadyUsedException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorBody(409, ex.getMessage()));
+    }
+
+    @ExceptionHandler(InvalidSessionException.class)
+    public ResponseEntity<Map<String, Object>> handleInvalidSession(InvalidSessionException ex) {
+        return ResponseEntity.badRequest().body(errorBody(400, ex.getMessage()));
+    }
+
+    @ExceptionHandler(ImplausibleScoreException.class)
+    public ResponseEntity<Map<String, Object>> handleImplausibleScore(ImplausibleScoreException ex) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorBody(422, ex.getMessage()));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidation(MethodArgumentNotValidException ex) {
         Map<String, String> fieldErrors = new HashMap<>();
