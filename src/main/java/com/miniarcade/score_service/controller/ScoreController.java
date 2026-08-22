@@ -2,6 +2,7 @@ package com.miniarcade.score_service.controller;
 
 import com.miniarcade.score_service.config.AuthenticatedUser;
 import com.miniarcade.score_service.dto.ScoreResponse;
+import com.miniarcade.score_service.entity.Difficulty;
 import com.miniarcade.score_service.dto.ScoreSubmitRequest;
 import com.miniarcade.score_service.dto.StartSessionRequest;
 import com.miniarcade.score_service.dto.StartSessionResponse;
@@ -49,9 +50,10 @@ public class ScoreController {
     @GetMapping
     public List<ScoreResponse> topScores(
             @RequestParam String gameType,
+            @RequestParam(required = false) Difficulty difficulty,
             @RequestParam(required = false) Integer limit
     ) {
-        return scoreService.topScores(gameType, limit);
+        return scoreService.topScores(gameType, difficulty, limit);
     }
 
     /** Caller's own scores (auth required). */

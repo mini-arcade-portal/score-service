@@ -5,6 +5,7 @@ import com.miniarcade.score_service.dto.ScoreResponse;
 import com.miniarcade.score_service.dto.ScoreSubmitRequest;
 import com.miniarcade.score_service.dto.StartSessionRequest;
 import com.miniarcade.score_service.dto.StartSessionResponse;
+import com.miniarcade.score_service.entity.Difficulty;
 import com.miniarcade.score_service.entity.GameSession;
 import com.miniarcade.score_service.entity.Score;
 import com.miniarcade.score_service.exception.ImplausibleScoreException;
@@ -107,13 +108,13 @@ public class ScoreService {
     }
 
     @Transactional(readOnly = true)
-    public List<ScoreResponse> topScores(String gameType, Integer limit) {
+    public List<ScoreResponse> topScores(String gameType, Difficulty difficulty, Integer limit) {
         int safeLimit = clampLimit(limit);
-        return scoreRepository
-                .findByGameTypeOrderByScoreDesc(gameType, PageRequest.of(0, safeLimit))
-                .stream()
-                .map(ScoreResponse::from)
-                .toList();
+        PageRequest page = PageRequest.of(0, safeLimit);
+        List<Score> scores = difficulty == null
+                ? scoreRepository.findByGameTypeOrderByScoreDesc(gameType, page)
+                : scoreRepository.findByGameTypeAndDifficultyOrderByScoreDesc(gameType, difficulty, page);
+        return scores.stream().map(ScoreResponse::from).toList();
     }
 
     @Transactional(readOnly = true)
