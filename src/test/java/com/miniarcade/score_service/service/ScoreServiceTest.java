@@ -237,7 +237,7 @@ class ScoreServiceTest {
         when(scoreRepository.findByGameTypeOrderByScoreDesc(eq("snake"), any(Pageable.class)))
                 .thenReturn(List.of());
 
-        scoreService.topScores("snake", null);
+        scoreService.topScores("snake", null, null);
 
         ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
         verify(scoreRepository).findByGameTypeOrderByScoreDesc(eq("snake"), pageableCaptor.capture());
@@ -249,7 +249,7 @@ class ScoreServiceTest {
         when(scoreRepository.findByGameTypeOrderByScoreDesc(eq("snake"), any(Pageable.class)))
                 .thenReturn(List.of());
 
-        scoreService.topScores("snake", 500);
+        scoreService.topScores("snake", null, 500);
 
         ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
         verify(scoreRepository).findByGameTypeOrderByScoreDesc(eq("snake"), pageableCaptor.capture());
@@ -261,7 +261,7 @@ class ScoreServiceTest {
         when(scoreRepository.findByGameTypeOrderByScoreDesc(eq("snake"), any(Pageable.class)))
                 .thenReturn(List.of());
 
-        scoreService.topScores("snake", 5);
+        scoreService.topScores("snake", null, 5);
 
         ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
         verify(scoreRepository).findByGameTypeOrderByScoreDesc(eq("snake"), pageableCaptor.capture());
@@ -273,7 +273,7 @@ class ScoreServiceTest {
         when(scoreRepository.findByGameTypeOrderByScoreDesc(eq("snake"), any(Pageable.class)))
                 .thenReturn(List.of());
 
-        scoreService.topScores("snake", -1);
+        scoreService.topScores("snake", null, -1);
 
         ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
         verify(scoreRepository).findByGameTypeOrderByScoreDesc(eq("snake"), pageableCaptor.capture());
