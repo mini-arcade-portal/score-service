@@ -30,3 +30,5 @@ springdoc:
 app:
   jwt:
     secret: ${JWT_SECRET}
+  game-session:
+    ttl-minutes: ${GAME_SESSION_TTL_MINUTES:30}
